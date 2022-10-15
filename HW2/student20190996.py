@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 
-import openpyxl.load_workbook
+from openpyxl import load_workbook
 
-st = openpyxl.load_workbook('student.xlsx')
-sheet = st['Sheet1']
+st = load_workbook('student.xlsx')
+sheet = st.active
 
 scoreList = []
 row_i = 1
@@ -13,13 +13,13 @@ for row in sheet:
 		total += sheet.cell(row_i, 4).value * 0.35
 		total += sheet.cell(row_i, 5).value * 0.34
 		total += sheet.cell(row_i, 6).value * 0.01
-		sheet.cell(row_i, 7).value = total
+		sheet.cell(row_i, 7, total)
 		scoreList.append(total)
 	row_i += 1
 
 stuNum = len(scoreList)
-scoreList.reverse()
-
+scoreList.sort(reverse=True)
+#scoreList.reverse()
 
 gradeA = int(stuNum * 0.3)
 while scoreList[gradeA - 1] == scoreList[gradeA]:
@@ -38,21 +38,25 @@ while scoreList[gradeBplus - 1] == scoreList[gradeBplus]:
 	gradeBplus -= 1
 
 gradeCplus = gradeB + int((stuNum - gradeB) * 0.5)
-while total[gradeCplus - 1] == scoreList[gradeCplus]:
+while scoreList[gradeCplus - 1] == scoreList[gradeCplus]:
 	gradeCplus -= 1
 
-for i in range(2, stuNum + 2):
-	if sheet.cell(i, 7).value >= scoreList[gradeAplus]:
-		sheet.cell(i, 8).value = 'A+'
-	elif sheet.cell(i, 7).value >= scoreList[gradeA]:
-		sheet.cell(i, 8).value = 'A0'
-	elif sheet.cell(i, 7).value >= scoreList[gradeBplue]:
-		sheet.cell(i, 8).value = 'B+'
-	elif sheet.cell(i, 7).value >= scoreList[gradeB]:
-		sheet.cell(i, 8).value = 'B0'
-	elif sheet.cell(i, 7).value >= scoreList[gradeCplue]:
-		sheet.cell(i, 8).value = 'C+'
-	else:
-		sheet.cell(i, 8).value = 'C0'
+print(gradeAplus, gradeA, gradeBplus, gradeB, gradeCplus, stuNum)
+print(scoreList)
 
-st.save("student.xlsx")
+
+for i in range(2, stuNum + 2):
+	if sheet.cell(i, 7).value >= scoreList[gradeAplus - 1]:
+		sheet.cell(i, 8, 'A+')
+	elif sheet.cell(i, 7).value >= scoreList[gradeA - 1]:
+		sheet.cell(i, 8, 'A0')
+	elif sheet.cell(i, 7).value >= scoreList[gradeBplus - 1]:
+		sheet.cell(i, 8, 'B+')
+	elif sheet.cell(i, 7).value >= scoreList[gradeB - 1]:
+		sheet.cell(i, 8, 'B0')
+	elif sheet.cell(i, 7).value >= scoreList[gradeCplus - 1]:
+		sheet.cell(i, 8, 'C+')
+	else:
+		sheet.cell(i, 8, 'C0')
+
+st.save("student_2.xlsx")
