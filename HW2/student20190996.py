@@ -19,7 +19,6 @@ for row in sheet:
 
 stuNum = len(scoreList)
 scoreList.sort(reverse=True)
-#scoreList.reverse()
 
 gradeA = int(stuNum * 0.3)
 while scoreList[gradeA - 1] == scoreList[gradeA]:
@@ -59,4 +58,4 @@ for i in range(2, stuNum + 2):
 	else:
 		sheet.cell(i, 8, 'C0')
 
-st.save("student_2.xlsx")
+st.save("student.xlsx")
