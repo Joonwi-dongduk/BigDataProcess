@@ -55,4 +55,4 @@ for i in range(2, stuNum + 2):
 	else:
 		sheet.cell(i, 8).value = 'C0'
 
-st.save("student_2.xlsx")
+st.save("student.xlsx")
