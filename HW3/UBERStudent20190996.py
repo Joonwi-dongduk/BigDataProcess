@@ -29,9 +29,6 @@ with open(input, "rt") as f:
 			weekday[day][num] = cont[2] + ',' + cont[3]
 		weekday[day][num]
 
-		vehicles = cont[2]
-		trips = cont[3]
-
 for n in range(7):
 	for w in weekday[n].keys():
 		file.write("%s,%s %s\n" %(w, week[n], weekday[n][w]))
