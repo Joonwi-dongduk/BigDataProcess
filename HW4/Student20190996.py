@@ -12,10 +12,10 @@ def createDataSet(trainingDataFolder, testDataFolder):
 	trainingLabels = []
 	testLabels = []
 
-	path = os.getcwd() + '\\' + trainingDataFolder
+	path = os.getcwd() + '/' + trainingDataFolder
 	for file in os.listdir(path):
 		text = ''
-		f = open(trainingDataFolder + '\\' + file, "rt")
+		f = open(trainingDataFolder + '/' + file, "rt")
 
 		# 줄 단위로 읽어오기, \n제거
 		while (True):
@@ -34,10 +34,10 @@ def createDataSet(trainingDataFolder, testDataFolder):
 		trainingSet.append(tList)
 		trainingLabels.append(int(file[0]))
 
-	path = os.getcwd() + '\\' + testDataFolder
+	path = os.getcwd() + '/' + testDataFolder
 	for file in os.listdir(path) :
 		text = ''
-		f = open(testDataFolder + '\\' + file, "rt")
+		f = open(testDataFolder + '/' + file, "rt")
 
 		while (True):
 			line = f.readline()
