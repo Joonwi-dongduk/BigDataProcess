@@ -62,7 +62,8 @@ def classify0(testObj, trainingSet, labels, k):
 
 	dataSetSize = dataSet.shape[0]
 	diffMat = np.tile(inX, (dataSetSize, 1)) - dataSet
-	distances = (diffMat ** 2).sum(axis = 1) ** 0.5
+	sqDistances = (diffMat ** 2).sum(axis = 1)
+	distances = sqDistances ** 0.5
 	sortedDistIndicies = distances.argsort()
 
 	classCount = {}
